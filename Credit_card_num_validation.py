@@ -11,6 +11,8 @@ def validate_credit_card(card):
     
     #checksum
     checksum = 0
+    #remainder
+    remainder = 0
     
     # cread a list of int for each num in card number
     for char in card:
@@ -29,19 +31,14 @@ def validate_credit_card(card):
     sum_digits = sum(card_list)
 
     # 3.Calculate the checksum by finding the remainder when the sum from step 2 is divided by 10.
-    checksum = sum_digits%10
+    remainder = sum_digits%10
     
     # If the remainder is 0, the checksum is 0. 
-    if checksum == 0:
-        #Compare the checksum obtained in step 3 with the check digit (the rightmost digit). 
-        #If they match, the credit card number is valid; otherwise, it is invalid.
-        if checksum == card_list[-1]:
-            return True
-        else:
-            return False
+    if remainder == 0:
+        return True
     # Otherwise, subtract the remainder from 10 to obtain the checksum.
     else:
-        checksum = 10 - checksum
+        checksum = 10 - remainder
         #Compare the checksum the check digit (the rightmost digit). 
         #If they match, the credit card number is valid; otherwise, it is invalid.
         if checksum == card_list[-1]:
@@ -49,10 +46,17 @@ def validate_credit_card(card):
         else:
             return False    
 
-card = '4556737586899855' 
-result = validate_credit_card(card)
-print(result)
-
+try:
+    card = input('Enter credit card number: ')
+    int_card = int(card.replace(" ",""))
+except:
+    print("Erro in credit card number, try again: ")
+else:
+    result = validate_credit_card(card.replace(" ",""))
+    if result:
+        print("Credit card number is VALID")
+    else:
+        print("Credit card number is INVALID")
 
 if __name__ == '__main__':
     main()
