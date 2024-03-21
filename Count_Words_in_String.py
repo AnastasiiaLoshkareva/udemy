@@ -5,6 +5,7 @@ import re
 
 #function to clear string from non alphabetical symbols
 def return_non_alphabetical(str):
+    # Use regular expression to match only alphabetical characters
     alpfabetical = ''.join(re.findall(r'[a-zA-Z ]',str))
     return alpfabetical
 
